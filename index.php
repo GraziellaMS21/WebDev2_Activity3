@@ -104,13 +104,13 @@
 
             <div class="form-group">
                 <label class="input_label">Price (&#8369;): </label>
-                <input type="number" name="price" min="0" step="0.01" value="<?php echo $product_price ?>" placeholder="0.00">
+                <input type="number" name="price" step="0.01" value="<?php echo $product_price ?>" placeholder="0.00">
                 <p class="error"><?php echo $product_price_error?></p>
             </div>
 
             <div class="form-group">
                 <label class="input_label">Stock Quantity: </label>
-                <input type="number" name="stock_quantity" min="0" value="<?php echo $product_stock_number; ?>" placeholder="0">
+                <input type="number" name="stock_quantity" value="<?php echo $product_stock_number; ?>" placeholder="0">
                 <p class="error"><?php echo $product_stock_number_error?></p>
             </div>
 
