@@ -6,7 +6,10 @@
     <title>Forms</title>
 </head>
 <body>
-    <form action="" method="get">
+    <!-- 1.4 When using the get method, the information entered in the input fields are shown  in the URL
+     query string. In contrast, the information entered in the input fields when using the post method disappear
+     after clicking the submit button. -->
+    <form action="viewproduct.php" method="post">
         <label>Product Name</label><br>
         <input type="text" name="product_name" required><br>
         <label>Category</label>
@@ -22,7 +25,7 @@
         <label>Stock Quantity: </label>
         <input type="number" name="stock_quantity" min="0" required><br>
         <label>Expiration Date: </label>
-        <input type="number" name="price" step="0.01" required><br>
+        <input type="date" name="expiration_date"required><br>
         <label>Status: </label>
         <input type="radio" name="status" value="active" checked> Active<br>
         <input type="radio" name="status" value="inactive" checked> Inactive<br>
