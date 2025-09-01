@@ -86,7 +86,7 @@
             <div class="form-group">
                 <label class="input_label">Product Name</label>
                 <input type="text" name="product_name" value="<?php echo $product_name; ?>" placeholder="e.g. ABC Cookies">
-                <p class="error"><?php echo $product_name_error?></p>
+                <p class="error"><?php echo $product_name_error?> </p>
             </div>
 
             <div class="form-group">
