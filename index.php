@@ -20,17 +20,13 @@
         if(empty($product_name)) {
             $product_name_error = "Product Name is Required";
         }
-    }
 
-    if($_SERVER["REQUEST_METHOD"] =="POST"){
         //validation for product category
         $product_category = trim(htmlspecialchars($_POST["category"]));
         if(empty($product_category)) {
             $product_category_error = "Product Category is Required";
         }
-    }
 
-    if($_SERVER["REQUEST_METHOD"] =="POST"){
         //validation for product price
         $product_price = trim($_POST["price"]);
         if(empty($product_price)) {
@@ -40,9 +36,7 @@
         } else {
             $product_price = number_format($product_price, 2);
         }
-    }
 
-    if($_SERVER["REQUEST_METHOD"] =="POST"){
         //validation for product stock
         $product_stock_number = trim($_POST["stock_quantity"]);
         if(empty($product_stock_number)) {
@@ -54,22 +48,17 @@
         } else {
             $product_stock_number = number_format($product_stock_number, 2);
         }
-    }
 
-    if($_SERVER["REQUEST_METHOD"] =="POST"){
         //validation for product expiration date
-        $product_expiration_date = trim($_POST["expiration_date"]);
-        if(empty($product_expiration_date)) {
-            $product_price_error = "Product Expiration Date is Required";
-        } else if (strtotime($product_expiration_date) < strtotime(date("Y-m-d"))){
-            $product_price_error = "Product Expiration Date must be Current or Future Date";
+        $product_expiration_date = trim($_POST["expiration_date"] ?? "");
+        if (empty($product_expiration_date)) {
+            $product_expiration_date_error = "Product Expiration Date is Required";
+        } elseif (strtotime($product_expiration_date) < strtotime(date("Y-m-d"))) {
+            $product_expiration_date_error = "Product Expiration Date must be Current or Future Date";
         } else {
-            $product_expiration_date = date("M-d-Y", strtotime($_POST["expiration_date"]));
+            $product_expiration_date = date("Y-m-d", strtotime($product_expiration_date));
         }
-    }
-    
 
-    if($_SERVER["REQUEST_METHOD"] =="POST"){
         //validation for product status
         if (!isset($_POST["status"]) || empty($_POST["status"])) {
             $product_status_error = "Product Status is Required";
@@ -92,30 +81,35 @@
      after clicking the submit button. -->
     <form action="" method="post">
         <label>Product Name</label><br>
-        <input type="text" name="product_name"><br>
+        <input type="text" name="product_name" value="<?php echo $product_name; ?>"><br>
         <p style="color: red; margin: 0;"><?php echo $product_name_error?></p>
         <label>Category</label>
         <select name="category">
             <option value="">-- Select Category --</option>
-            <option value="Category A">Category A</option>
-            <option value="Category B">Category B</option>
-            <option value="Category C">Category C</option>
-            <option value="Category D">Category D</option>
+            <option value="Category A" <?php if($product_category == "Category A") echo "selected"; ?>>Category A</option>
+            <option value="Category B" <?php if($product_category == "Category B") echo "selected"; ?>>Category B</option>
+            <option value="Category C" <?php if($product_category == "Category C") echo "selected"; ?>>Category C</option>
+            <option value="Category D" <?php if($product_category == "Category D") echo "selected"; ?>>Category D</option>
         </select><br>
         <p style="color: red; margin: 0;"><?php echo $product_category_error?></p>
+        
         <label>Price (&#8369;): </label>
-        <input type="number" name="price" step="0.01"><br>
+        <input type="number" name="price" step="0.01" value="<?php echo $product_price; ?>"><br>
         <p style="color: red; margin: 0;"><?php echo $product_price_error?></p>
+
         <label>Stock Quantity: </label>
-        <input type="number" name="stock_quantity" min="0"><br>
+        <input type="number" name="stock_quantity" min="0" value="<?php echo $product_stock_number; ?>"><br>
         <p style="color: red; margin: 0;"><?php echo $product_stock_number_error?></p>
+
         <label>Expiration Date: </label>
-        <input type="date" name="expiration_date"><br>
+        <input type="date" name="expiration_date" value="<?php echo $product_expiration_date; ?>"><br>
         <p style="color: red; margin: 0;"><?php echo $product_expiration_date_error?></p>
+
         <label>Status: </label>
-        <input type="radio" name="status" value="active"> Active<br>
-        <input type="radio" name="status" value="inactive"> Inactive<br>
+        <input type="radio" name="status" value="active" <?php if($product_status == "active") echo "checked"; ?>> Active<br>
+        <input type="radio" name="status" value="inactive" <?php if($product_status == "inactive") echo "   checked"; ?>> Inactive<br>
         <p style="color: red; margin: 0;"><?php echo $product_status_error?></p>
+
         <input type="submit" value="Save Product">
     </form>
 </body>
