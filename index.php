@@ -74,44 +74,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Forms</title>
 </head>
 <body>
-    <!-- 1.4 When using the get method, the information entered in the input fields are shown  in the URL
-     query string. In contrast, the information entered in the input fields when using the post method disappear
-     after clicking the submit button. -->
-    <form action="" method="post">
-        <label>Product Name</label><br>
-        <input type="text" name="product_name" value="<?php echo $product_name; ?>"><br>
-        <p style="color: red; margin: 0;"><?php echo $product_name_error?></p>
-        <label>Category</label>
-        <select name="category">
-            <option value="">-- Select Category --</option>
-            <option value="Category A" <?php if($product_category == "Category A") echo "selected"; ?>>Category A</option>
-            <option value="Category B" <?php if($product_category == "Category B") echo "selected"; ?>>Category B</option>
-            <option value="Category C" <?php if($product_category == "Category C") echo "selected"; ?>>Category C</option>
-            <option value="Category D" <?php if($product_category == "Category D") echo "selected"; ?>>Category D</option>
-        </select><br>
-        <p style="color: red; margin: 0;"><?php echo $product_category_error?></p>
-        
-        <label>Price (&#8369;): </label>
-        <input type="number" name="price" step="0.01" value="<?php echo $product_price; ?>"><br>
-        <p style="color: red; margin: 0;"><?php echo $product_price_error?></p>
+     <!-- 1.4 When using the get method, the information entered in the input fields are shown  in the URL
+      query string. In contrast, the information entered in the input fields when using the post method disappear
+      after clicking the submit button. -->
+    <div class="container">
+        <h2 class="form-title">📦 Register New Product</h2>
 
-        <label>Stock Quantity: </label>
-        <input type="number" name="stock_quantity" min="0" value="<?php echo $product_stock_number; ?>"><br>
-        <p style="color: red; margin: 0;"><?php echo $product_stock_number_error?></p>
+        <form action="" method="post" class="product-form">
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" name="product_name" value="<?php echo $product_name; ?>">
+                <p class="error"><?php echo $product_name_error?></p>
+            </div>
 
-        <label>Expiration Date: </label>
-        <input type="date" name="expiration_date" value="<?php echo $product_expiration_date; ?>"><br>
-        <p style="color: red; margin: 0;"><?php echo $product_expiration_date_error?></p>
+            <div class="form-group">
+                <label>Category</label>
+                <select name="category">
+                    <option value="">-- Select Category --</option>
+                    <option value="Category A" <?php if($product_category == "Category A") echo "selected"; ?>>Category A</option>
+                    <option value="Category B" <?php if($product_category == "Category B") echo "selected"; ?>>Category B</option>
+                    <option value="Category C" <?php if($product_category == "Category C") echo "selected"; ?>>Category C</option>
+                    <option value="Category D" <?php if($product_category == "Category D") echo "selected"; ?>>Category D</option>
+                </select>
+                <p class="error"><?php echo $product_category_error?></p>
+            </div>
 
-        <label>Status: </label>
-        <input type="radio" name="status" value="active" <?php if($product_status == "active") echo "checked"; ?>> Active<br>
-        <input type="radio" name="status" value="inactive" <?php if($product_status == "inactive") echo "   checked"; ?>> Inactive<br>
-        <p style="color: red; margin: 0;"><?php echo $product_status_error?></p>
+            <div class="form-group">
+                <label>Price (&#8369;): </label>
+                <input type="number" name="price" step="0.01" value="<?php echo number_format($product_price, 2); ?>">
+                <p class="error"><?php echo $product_price_error?></p>
+            </div>
 
-        <input type="submit" value="Save Product">
-    </form>
+            <div class="form-group">
+                <label>Stock Quantity: </label>
+                <input type="number" name="stock_quantity" min="0" value="<?php echo $product_stock_number; ?>">
+                <p class="error"><?php echo $product_stock_number_error?></p>
+            </div>
+
+            <div class="form-group">
+                <label>Expiration Date: </label>
+                <input type="date" name="expiration_date" value="<?php echo $product_expiration_date; ?>">
+                <p class="error"><?php echo $product_expiration_date_error?></p>
+            </div>
+
+            <div class="form-group">
+                <label>Status: </label>
+                <div class="radio-group">
+                    <label><input type="radio" name="status" value="active" <?php if($product_status == "active") echo "checked"; ?>> Active</label>
+                    <label><input type="radio" name="status" value="inactive" <?php if($product_status == "inactive") echo "checked"; ?>> Inactive</label>
+                </div>
+                <p class="error"><?php echo $product_status_error?></p>
+            </div>
+
+            <input type="submit" value="💾 Save Product" class="submit-btn">
+        </form>
+    </div>
 </body>
 </html>
