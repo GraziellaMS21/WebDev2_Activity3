@@ -1,18 +1,8 @@
 <!DOCTYPE html>
 
 <?php 
-    $product_name = "";
-    $product_name_error = "";
-    $product_price = "";
-    $product_price_error = "";
-    $product_category = "";
-    $product_category_error = "";
-    $product_stock_number= "";
-    $product_stock_number_error = "";
-    $product_expiration_date= "";
-    $product_expiration_date_error = "";
-    $product_status= "";
-    $product_status_error = "";
+    $product_name = $product_price = $product_category =  $product_stock_number = $product_expiration_date = $product_status = "";
+    $product_name_error = $product_price_error = $product_category_error = $product_stock_number_error = $product_expiration_date_error = $product_status_error = "";
 
     if($_SERVER["REQUEST_METHOD"] =="POST"){
         //validation for product name
@@ -33,7 +23,10 @@
             $product_price_error = "Product Price is Required";
         } else if (!is_numeric($product_price)){
             $product_price_error = "Product Price must be a Number";
-        } else {
+        } else if ($product_price <= 0){
+            $product_price_error = "Product Price must be Greater than 0";
+        }
+        else {
             $product_price = number_format($product_price, 2);
         }
 
@@ -65,7 +58,12 @@
         } else {
             $product_status = $_POST["status"];
         }
-        header("Location: redirect.php");
+
+        if (empty($product_name_error) && empty($product_category_error) && empty($product_price_error) &&
+        empty($product_stock_number_error) && empty($product_expiration_date_error) && empty($product_status_error) ) {
+            header("Location: redirect.php");
+            exit; 
+        }
     }
 ?>
 
@@ -81,20 +79,21 @@
      <!-- 1.4 When using the get method, the information entered in the input fields are shown  in the URL
       query string. In contrast, the information entered in the input fields when using the post method disappear
       after clicking the submit button. -->
+    <h1>DELI FOODS</h1>
     <div class="container">
-        <h2 class="form-title">📦 Register New Product</h2>
+        <h2 class="form-title">REGISTER NEW PRODUCT</h2>
 
         <form action="" method="post" class="product-form">
             <div class="form-group">
-                <label>Product Name</label>
-                <input type="text" name="product_name" value="<?php echo $product_name; ?>">
+                <label class="input_label">Product Name</label>
+                <input type="text" name="product_name" value="<?php echo $product_name; ?>" placeholder="e.g. ABC Cookies">
                 <p class="error"><?php echo $product_name_error?></p>
             </div>
 
             <div class="form-group">
-                <label>Category</label>
-                <select name="category">
-                    <option value="">-- Select Category --</option>
+                <label class="input_label">Category</label>
+                <select name="category" id="select">
+                    <option value="" class="select_category">-- Select Category --</option>
                     <option value="Category A" <?php if($product_category == "Category A") echo "selected"; ?>>Category A</option>
                     <option value="Category B" <?php if($product_category == "Category B") echo "selected"; ?>>Category B</option>
                     <option value="Category C" <?php if($product_category == "Category C") echo "selected"; ?>>Category C</option>
@@ -104,25 +103,25 @@
             </div>
 
             <div class="form-group">
-                <label>Price (&#8369;): </label>
-                <input type="number" name="price" step="0.01" value="<?php echo number_format($product_price, 2); ?>">
+                <label class="input_label">Price (&#8369;): </label>
+                <input type="number" name="price" min="0" step="0.01" value="<?php echo $product_price ?>" placeholder="0.00">
                 <p class="error"><?php echo $product_price_error?></p>
             </div>
 
             <div class="form-group">
-                <label>Stock Quantity: </label>
-                <input type="number" name="stock_quantity" min="0" value="<?php echo $product_stock_number; ?>">
+                <label class="input_label">Stock Quantity: </label>
+                <input type="number" name="stock_quantity" min="0" value="<?php echo $product_stock_number; ?>" placeholder="0">
                 <p class="error"><?php echo $product_stock_number_error?></p>
             </div>
 
             <div class="form-group">
-                <label>Expiration Date: </label>
-                <input type="date" name="expiration_date" value="<?php echo $product_expiration_date; ?>">
+                <label class="input_label">Expiration Date: </label>
+                <input type="date" name="expiration_date" class="select_category" value="<?php echo $product_expiration_date; ?>">
                 <p class="error"><?php echo $product_expiration_date_error?></p>
             </div>
 
             <div class="form-group">
-                <label>Status: </label>
+                <label class="input_label">Status: </label>
                 <div class="radio-group">
                     <label><input type="radio" name="status" value="active" <?php if($product_status == "active") echo "checked"; ?>> Active</label>
                     <label><input type="radio" name="status" value="inactive" <?php if($product_status == "inactive") echo "checked"; ?>> Inactive</label>

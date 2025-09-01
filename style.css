@@ -1,4 +1,8 @@
-/* Color Palette */
+@font-face {
+    font-family: "Moldie";
+    src: url("font/Moldie_Demo.otf") format("opentype");
+}
+
 :root {
     --mint: #E4F7EE;
     --aqua: #C7E9ED;
@@ -7,21 +11,35 @@
     --light-lavender: #F0E8FA;
 }
 
-/* Base Styles */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--light-lavender);
+    background: linear-gradient(135deg, #DAD9FA, #F0E8FA);
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    flex-direction: column;
     padding: 50px 20px;
     color: #333;
 }
 
+h1 {
+    font-family: Moldie;
+    letter-spacing: 0.3rem;
+    font-size: 5rem;
+    color: rgb(129, 93, 129);
+}
+
 .container {
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     background-color: #fff;
     padding: 40px 30px;
     border-radius: 12px;
@@ -32,7 +50,10 @@ body {
 .form-title {
     text-align: center;
     margin-bottom: 30px;
-    color: #2c3e50;
+    color: rgb(61, 61, 61);
+    font-weight: 900;
+    transition: scale 0.8s ease-in-out;
+    font-size: 2rem;
 }
 
 .product-form {
@@ -44,9 +65,19 @@ body {
 }
 
 label {
-    font-weight: 600;
+    font-weight: 700;
     display: block;
     margin-bottom: 6px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.input_label {
+    transition: transform 0.2s ease-in-out;
+}
+
+.input_label:hover {
+    transform: translateY(-30%);
+    transition: transform 0.2s ease-in-out;
 }
 
 input[type="text"],
@@ -60,12 +91,22 @@ select {
     border-radius: 6px;
     background-color: var(--mint);  
     transition: border-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
 }
 
 input:focus,
 select:focus {
     border-color: var(--blue);
     outline: none;
+    background-color: rgb(238, 238, 238);
+    transition: background-color 0.2s ease-in-out;
+}
+
+#select {
+    color: rgba(0, 0, 0, 0.8);
+}
+.select_category {
+    color: rgba(0, 0, 0, 0.5);
 }
 
 .radio-group {
@@ -92,7 +133,7 @@ input[type="radio"] {
 .submit-btn {
     width: 100%;
     background-color: var(--blue);
-    color: white;
+    color: rgb(46, 45, 56);
     padding: 12px;
     font-size: 16px;
     font-weight: bold;
