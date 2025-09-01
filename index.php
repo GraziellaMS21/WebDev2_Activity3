@@ -82,7 +82,6 @@
     <h1>DELI FOODS</h1>
     <div class="container">
         <h2 class="form-title">REGISTER NEW PRODUCT</h2>
-
         <form action="" method="post" class="product-form">
             <div class="form-group">
                 <label class="input_label">Product Name</label>
