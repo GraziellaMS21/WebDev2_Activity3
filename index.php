@@ -65,6 +65,7 @@
         } else {
             $product_status = $_POST["status"];
         }
+        header("Location: redirect.php");
     }
 ?>
 
