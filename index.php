@@ -115,8 +115,8 @@
             </div>
 
             <div class="form-group">
-                <label>Expiration Date: </label>
-                <input type="date" name="expiration_date" class="select_category" value="<?php echo $product_expiration_date; ?>">
+                <label class="input_label">Expiration Date: </label>
+                <input type="date" name="expiration_date" value="<?php echo $product_expiration_date; ?>">
                 <p class="error"><?php echo $product_expiration_date_error?></p>
             </div>
 
